@@ -16,6 +16,7 @@ import {
   tryEnsureSong,
   tryEnsureEffect,
   getCapped,
+  shrug,
 } from './lib';
 import {
   myMp,
@@ -38,8 +39,9 @@ import {
   weightAdjustment,
   familiarWeight,
   getCampground,
+  print,
 } from 'kolmafia';
-import { $item, $skill, $location, $familiar, $effect, get, set } from 'libram/src';
+import { $item, $skill, $location, $familiar, $effect, get, set, have } from 'libram';
 
 export function moodBaseline() {
   if (myMp() < 200) {
@@ -72,6 +74,7 @@ export function moodNoncombat() {
 }
 
 export function addFamiliarWeight() {
+  shrug($effect`Ur-Kel's Aria of Annoyance`);
   tryEnsureEffect($effect`Chorale of Companionship`);
   tryEnsureEffect($effect`Billiards Belligerence`);
   tryEnsureEffect($effect`Do I Know You From Somewhere?`);
@@ -216,7 +219,7 @@ export function dailyDungeon() {
       $location`The Daily Dungeon`,
       Macro.externalIf(
         !get('_dailyDungeonMalwareUsed'),
-        Macro.item($item`daily dungeon malware`)
+        Macro.tryItem($item`daily dungeon malware`)
       ).kill()
     );
   }
@@ -236,7 +239,7 @@ export function bridge() {
     const count = (34 - getPropertyInt('chasmBridgeProgress')) / 5;
     getCapped(count, $item`smut orc keepsake box`, 20000);
     use(count, $item`smut orc keepsake box`);
-    visitUrl(`place.php ? whichplace = orc_chasm & action=bridge${getProperty('chasmBridgeProgress')}`);
+    visitUrl(`place.php?whichplace=orc_chasm&action=bridge${getProperty('chasmBridgeProgress')}`);
   }
 }
 

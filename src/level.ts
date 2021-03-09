@@ -54,7 +54,6 @@ function levelMood() {
   tryEnsureEffect($effect`Starry-Eyed`);
   tryEnsureSkill($skill`CHEAT CODE: Triple Size`);
   tryEnsureEffect($effect`You Learned Something Maybe!`);
-  tryEnsureEffect($effect`That's Just Cloud-Talk, Man`);
   if ((get('daycareOpen') || get('_daycareToday')) && !get('_daycareSpa')) cliExecute(`daycare ${myPrimestat()}`);
 
   if (myMp() < 200) {
@@ -224,7 +223,7 @@ export function level(useResources = true) {
   ) {
     useFamiliar($familiar`Pocket Professor`);
     maximizeCached(
-      'mainstat, 4 exp, 30 mainstat experience percent, 30 familiar weight 50 min, equip makeshift garbage shirt, equip Pocket Professor memory chip, equip Kramco'
+      'mainstat, 4 exp, 30 mainstat experience percent, 30 familiar weight, equip makeshift garbage shirt, equip Pocket Professor memory chip, equip Kramco'
     );
     levelMood();
     restoreHp(myMaxhp());
