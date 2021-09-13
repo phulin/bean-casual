@@ -1,5 +1,5 @@
 import { cliExecute, visitUrl, availableAmount, runChoice, getProperty, setProperty, use } from 'kolmafia';
-import { $item } from 'libram/src';
+import { $item } from 'libram';
 import { setClan, tryUse, getCapped } from './lib';
 
 export function intro() {
