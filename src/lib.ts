@@ -30,7 +30,7 @@ import {
   maximize,
   myBasestat,
 } from 'kolmafia';
-import { $effect, $skill, $stat } from 'libram/src';
+import { $effect, $skill, $stat } from 'libram';
 
 export function clamp(n: number, min: number, max: number) {
   return Math.max(min, Math.min(n, max));

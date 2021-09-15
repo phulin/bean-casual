@@ -23,7 +23,7 @@ import {
   print,
   myBasestat,
 } from 'kolmafia';
-import { $effect, $familiar, $item, $location, $monster, $skill, $stat, get } from 'libram/src';
+import { $effect, $familiar, $item, $location, $monster, $skill, $stat, get } from 'libram';
 import { MODE_MACRO, MODE_NULL, adventureCopy, setMode, Macro, adventureMacro } from './combat';
 import { intro } from './intro';
 import {

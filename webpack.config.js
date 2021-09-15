@@ -1,5 +1,6 @@
-var path = require('path');
-var webpack = require('webpack');
+/* eslint-env node */
+
+const path = require('path');
 
 module.exports = {
   entry: {

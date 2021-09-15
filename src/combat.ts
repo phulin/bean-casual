@@ -24,7 +24,7 @@ import {
   visitUrl,
   removeProperty,
 } from 'kolmafia';
-import { $skill, $familiar, $effect, Macro as LibramMacro, set, get } from 'libram/src';
+import { $skill, $familiar, $effect, Macro as LibramMacro, set, get } from 'libram';
 import { getPropertyInt, myFamiliarWeight, setPropertyInt } from './lib';
 
 // multiFight() stolen from Aenimus: https://github.com/Aenimus/aen_cocoabo_farm/blob/master/scripts/aen_combat.ash.

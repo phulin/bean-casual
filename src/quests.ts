@@ -98,7 +98,7 @@ export function billiards() {
     adventureMacro($location`The Haunted Kitchen`, Macro.skill($skill`Saucestorm`).repeat());
   }
 
-  while (availableAmount(Item.get(7302 /* Spookyraven library key */)) === 0) {
+  while (availableAmount($item`[7302]Spookyraven library key`) === 0) {
     while (myInebriety() < 5 && availableAmount($item`astral pilsner`) > 0) {
       tryEnsureSong($skill`The Ode to Booze`);
       drinkSafe(1, $item`astral pilsner`);
