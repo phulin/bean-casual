@@ -67,9 +67,9 @@ jobs:
           rm -r ccs/
           rm -r images/
           mv KoLmafia/scripts scripts
-          mv KoLmafia/ccs ./ccs
-          mv KoLmafia/data ./data
-          mv KoLmafia/dependencies.txt dependencies.txt
+          mv mafia/ccs ./ccs
+          mv mafia/data ./data
+          mv mafia/dependencies.txt dependencies.txt
       - run: |
           git add scripts/
           git add ccs/
