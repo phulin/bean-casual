@@ -8,6 +8,7 @@
     "build": "npm run build:types && npm run build:js",
     "build:types": "tsc",
     "build:js": "webpack",
+    "lint": "eslint src && prettier --check .",
     "watch": "webpack --watch --progress"
   },
   "repository": {
@@ -26,7 +27,6 @@
   "devDependencies": {
     "@babel/cli": "^7.12.8",
     "@babel/core": "^7.12.9",
-    "@babel/plugin-proposal-decorators": "^7.12.12",
     "@babel/plugin-proposal-object-rest-spread": "^7.12.1",
     "@babel/preset-env": "^7.12.7",
     "@babel/preset-typescript": "^7.12.7",
