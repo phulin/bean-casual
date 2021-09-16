@@ -97,19 +97,13 @@ export function level(useResources = true): void {
     propertyManager.setChoices({
       1222: 1, // Entrance
       1223: 1, // Fight LOV Enforcer
+      // Eardigan, Epaulettes, Earrings
+      1224: myPrimestat() === $stat`Muscle` ? 1 : myPrimestat() === $stat`Mysticality` ? 2 : 3,
       1225: 1, // Fight LOV Engineer
       1226: 2, // Open Heart Surgery
       1227: 1, // Fight LOV Equivocator
       1228: 3, // Take chocolate
     });
-
-    if (myPrimestat() === $stat`Muscle`) {
-      setChoice(1224, 1); // LOV Eardigan
-    } else if (myPrimestat() === $stat`Mysticality`) {
-      setChoice(1224, 2); // LOV Epaulettes
-    } else if (myPrimestat() === $stat`Moxie`) {
-      setChoice(1224, 3); // LOV Earrings
-    }
 
     adventureMacro($location`The Tunnel of L.O.V.E.`, macro);
     if (handlingChoice()) throw "Did not get all the way through LOV.";
