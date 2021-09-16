@@ -1,77 +1,113 @@
 import {
-  setProperty,
-  getProperty,
+  abort,
+  cliExecute,
+  fileToBuffer,
+  myAscensions,
+  myFullness,
+  myInebriety,
+  myLevel,
   myMeat,
   print,
-  cliExecute,
-  abort,
+  setProperty,
   visitUrl,
-  myLevel,
-  myAscensions,
-  fileToBuffer,
-  myInebriety,
-  myFullness,
-} from 'kolmafia';
-import { intro } from './intro';
-import { level } from './level';
-import { getPropertyBoolean } from './lib';
-import { billiards, war, dailyDungeon, ores, bridge, aboo, blackForest, shen, airship } from './quests';
+} from "kolmafia";
+import { $familiars, $items, $skills, get, have } from "libram";
 
-export function main() {
-  setProperty('bcas_objective', '');
-  const dietScript = getProperty('bcas_diet');
+import { intro } from "./intro";
+import { level } from "./level";
+import { heroKeys } from "./quests/keys";
+import { TrapperQuest as trapperQuest } from "./quests/level8";
+import { abooPeak, chasmBridge } from "./quests/level9";
+import { airship } from "./quests/level10";
+import { billiards, blackForest, shen } from "./quests/level11";
+import { war } from "./quests/level12";
+import { propertyManager } from "./global";
+import { runQuest } from "./quests/structure";
+import { MosquitoQuest as mosquitoQuest } from "./quests/level2";
 
-  if (myMeat() > 5000000) {
-    if (getPropertyBoolean('bcas_autoClosetMeat', false)) {
-      const closetAmount = myMeat() - 5 * 1000 * 1000;
-      print(`You have more than 5M liquid meat! Putting ${closetAmount} in the closet automatically.`, 'blue');
-      cliExecute(`closet put ${closetAmount} meat`);
-    } else {
-      throw (
-        'You have more than 5M liquid meat! ' +
-        'Put it in the closet to avoid autoscend danger, or set bcas_autoClosetMeat to true and rerun.'
-      );
-    }
-  }
-
-  intro();
-  level();
-
-  print('Refreshing council quests...');
-  visitUrl('council.php');
-
-  if (myLevel() < 13) abort('Something went wrong in leveling!');
-
-  if (parseInt(getProperty('bcas_lastStockedUp') || '0', 10) < myAscensions()) {
-    print('Stocking up!');
-    for (const line of fileToBuffer('data/bean-casual/pulls.txt').split('\n')) {
+function stockUp(): void {
+  if (parseInt(get("bcas_lastStockedUp") || "0", 10) < myAscensions()) {
+    print("Stocking up!");
+    for (const line of fileToBuffer("data/bean-casual/pulls.txt").split("\n")) {
       print(`acquire ${line}`);
       if (line.length === 0) continue;
       cliExecute(`acquire ${line}`);
     }
-    setProperty('bcas_lastStockedUp', `${myAscensions()}`);
+    setProperty("bcas_lastStockedUp", `${myAscensions()}`);
   }
+}
 
-  airship();
-  billiards();
-
-  if (myInebriety() <= 5 && myFullness() <= 0) {
-    if (dietScript === '') {
-      abort('Set property "bcas_diet" with your diet script, or consume your diet and rerun.');
+const requiredFamiliars = $familiars`Exotic Parrot, Pocket Professor, Reassembled Blackbird`;
+const requiredItems = $items`Kramco Sausage-o-Matic™`;
+const requiredSkills = $skills`Lock Picking, Saucestorm`;
+function checkRequirements() {
+  let fail = false;
+  for (const thing of [...requiredFamiliars, ...requiredItems, ...requiredSkills]) {
+    if (!have(thing)) {
+      fail = true;
+      print(`You don't have ${thing}, which is required to run this script.`, "red");
     }
-    cliExecute(dietScript);
   }
+  if (fail) throw "Missing required things to run script.";
+}
 
-  war();
-  dailyDungeon();
-  ores();
-  bridge();
-  aboo();
-  blackForest();
-  shen();
+export function main(): void {
+  const dietScript = get<string>("bcas_diet");
 
-  setProperty('auto_abooclover', 'true');
-  setProperty('auto_interrupt', 'false');
+  checkRequirements();
 
-  cliExecute('autoscend');
+  try {
+    if (myMeat() > 5000000) {
+      if (get("bcas_autoClosetMeat", false)) {
+        const closetAmount = myMeat() - 5 * 1000 * 1000;
+        print(
+          `You have more than 5M liquid meat! Putting ${closetAmount} in the closet automatically.`,
+          "blue"
+        );
+        cliExecute(`closet put ${closetAmount} meat`);
+      } else {
+        throw (
+          "You have more than 5M liquid meat! " +
+          "Put it in the closet to avoid autoscend danger, or set bcas_autoClosetMeat to true and rerun."
+        );
+      }
+    }
+
+    intro();
+    level();
+
+    if (myLevel() < 13) abort("Something went wrong in leveling!");
+
+    print("Refreshing council quests...");
+    visitUrl("council.php");
+
+    stockUp();
+
+    airship();
+    billiards();
+
+    if (myInebriety() <= 5 && myFullness() <= 0) {
+      if (dietScript === "") {
+        abort('Set property "bcas_diet" with your diet script, or consume your diet and rerun.');
+      }
+      cliExecute(dietScript);
+    }
+
+    war();
+    heroKeys();
+    chasmBridge();
+    abooPeak();
+    blackForest();
+    shen();
+
+    runQuest(mosquitoQuest);
+    runQuest(trapperQuest);
+
+    setProperty("auto_abooclover", "true");
+    setProperty("auto_interrupt", "false");
+
+    cliExecute("autoscend");
+  } finally {
+    propertyManager.resetAll();
+  }
 }

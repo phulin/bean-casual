@@ -2,9 +2,9 @@
   "compilerOptions": {
     "rootDir": "src",
     "noEmit": true /* Do not emit outputs. */,
+    "declaration": false,
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
-    "declaration": false,
     "forceConsistentCasingInFileNames": true,
     "lib": ["es2018"],
     "module": "commonjs",

@@ -1,22 +1,23 @@
 /* eslint-env node */
 
-const path = require('path');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const path = require("path");
 
 module.exports = {
   entry: {
-    bcas: './src/index.ts',
-    bcas_combat: './src/combat.ts',
-    bcas_level: './src/level.ts',
+    bcas: "./src/index.ts",
+    bcas_combat: "./src/combat.ts",
+    bcas_level: "./src/level.ts",
   },
-  mode: 'development',
+  mode: "development",
   devtool: false,
   output: {
-    path: path.resolve(__dirname, 'KoLmafia', 'scripts', 'bean-casual'),
-    filename: '[name].js',
-    libraryTarget: 'commonjs',
+    path: path.resolve(__dirname, "KoLmafia", "scripts", "bean-casual"),
+    filename: "[name].js",
+    libraryTarget: "commonjs",
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.json'],
+    extensions: [".ts", ".tsx", ".js", ".json"],
   },
   module: {
     rules: [
@@ -24,13 +25,13 @@ module.exports = {
         // Include ts, tsx, js, and jsx files.
         test: /\.(ts|js)x?$/,
         // exclude: /node_modules/,
-        loader: 'babel-loader',
+        loader: "babel-loader",
       },
     ],
   },
   plugins: [],
   externals: {
-    kolmafia: 'commonjs kolmafia',
-    'canadv.ash': 'commonjs canadv.ash',
+    kolmafia: "commonjs kolmafia",
+    "canadv.ash": "commonjs canadv.ash",
   },
 };
