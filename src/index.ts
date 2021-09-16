@@ -16,13 +16,14 @@ import { $familiars, $items, $skills, get, have } from "libram";
 import { intro } from "./intro";
 import { level } from "./level";
 import { heroKeys } from "./quests/keys";
-import { TrapperQuest } from "./quests/level8";
+import { TrapperQuest as trapperQuest } from "./quests/level8";
 import { abooPeak, chasmBridge } from "./quests/level9";
 import { airship } from "./quests/level10";
 import { billiards, blackForest, shen } from "./quests/level11";
 import { war } from "./quests/level12";
 import { propertyManager } from "./global";
 import { runQuest } from "./quests/structure";
+import { MosquitoQuest as mosquitoQuest } from "./quests/level2";
 
 function stockUp(): void {
   if (parseInt(get("bcas_lastStockedUp") || "0", 10) < myAscensions()) {
@@ -99,7 +100,8 @@ export function main(): void {
     blackForest();
     shen();
 
-    runQuest(TrapperQuest);
+    runQuest(mosquitoQuest);
+    runQuest(trapperQuest);
 
     setProperty("auto_abooclover", "true");
     setProperty("auto_interrupt", "false");

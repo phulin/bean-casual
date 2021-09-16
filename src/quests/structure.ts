@@ -1,4 +1,4 @@
-import { print } from "kolmafia";
+import { print, useFamiliar } from "kolmafia";
 import { adventureMacro, have, Mood, Requirement } from "libram";
 
 import { Macro } from "../combat";
@@ -29,8 +29,8 @@ function runStep(step: Step) {
     while (step.turnsRemaining() > 0) {
       if (step.familiarPriority) {
         const familiar = step.familiarPriority.find((familiar) => have(familiar));
-        if (!familiar)
-          throw `Couldn't find familiar out of ${step.familiarPriority} for ${step.name}.`;
+        if (familiar) useFamiliar(familiar);
+        // FIXME: Otherwise use best MPA familiar...
       }
       if (step.mood) step.mood().execute(step.turnsRemaining());
       if (step.requirement) {
