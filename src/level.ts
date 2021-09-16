@@ -34,7 +34,7 @@ import { Macro } from "./combat";
 import { propertyManager } from "./global";
 
 import { intro } from "./intro";
-import { acquire, setChoice, tryEnsureEffect } from "./lib";
+import { acquire, tryEnsureEffect } from "./lib";
 import { moodLevel } from "./mood";
 
 function leaflet(): void {
