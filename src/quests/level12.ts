@@ -43,10 +43,10 @@ export function ensureFluffers(flufferCount: number): void {
 }
 
 export function war(): void {
-  retrieveItem(1, $item`skeletal skiff`);
-  retrieveItem(1, $item`beer helmet`);
-  retrieveItem(1, $item`distressed denim pants`);
-  retrieveItem(1, $item`bejeweled pledge pin`);
+  retrieveItem($item`skeletal skiff`);
+  retrieveItem($item`beer helmet`);
+  retrieveItem($item`distressed denim pants`);
+  retrieveItem($item`bejeweled pledge pin`);
 
   while (get("warProgress") === "unstarted") {
     propertyManager.setChoices({

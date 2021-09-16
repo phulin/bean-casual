@@ -23,9 +23,9 @@ import {
 } from "libram";
 
 import { Macro } from "../combat";
-import { drinkSafe, ensureEffect, questStep, setChoice } from "../lib";
-import { moodBaseline, moodNoncombat } from "../mood";
 import { propertyManager } from "../global";
+import { drinkSafe, ensureEffect, questStep } from "../lib";
+import { moodBaseline, moodNoncombat } from "../mood";
 
 export function billiards(): void {
   if (!canAdv($location`The Haunted Kitchen`)) {
@@ -72,7 +72,7 @@ export function billiards(): void {
 
 export function blackForest(): void {
   while (questStep("questL11Black") < 2) {
-    setChoice(924, 1);
+    propertyManager.setChoices({ 923: 1, 924: 1 }); // Fight blackberry bush
     useFamiliar($familiar`Reassembled Blackbird`);
     moodBaseline().execute();
     maximizeCached(["0.1 Combat Rate 5 min"], { forceEquip: $items`blackberry galoshes` });
@@ -80,7 +80,7 @@ export function blackForest(): void {
   }
 
   if (questStep("questL11Black") < 3) {
-    retrieveItem(1, $item`forged identification documents`);
+    retrieveItem($item`forged identification documents`);
     adv1($location`The Shore, Inc. Travel Agency`, -1, "");
   }
 }

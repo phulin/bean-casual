@@ -13,7 +13,6 @@ import {
   mallPrice,
   myFamiliar,
   print,
-  setProperty,
   shopAmount,
   sweetSynthesis,
   takeCloset,
@@ -115,10 +114,6 @@ export function useIfUnused(item: Item, prop: string | boolean, maxPrice: number
 
 export function totalAmount(item: Item): number {
   return shopAmount(item) + itemAmount(item);
-}
-
-export function setChoice(adv: number, choice: number): void {
-  setProperty(`choiceAdventure${adv}`, `${choice}`);
 }
 
 export function myFamiliarWeight(): number {
