@@ -19487,10 +19487,9 @@ function aboo() {
 
   while (theoreticalProgress > 0) {
     // while blasts through intro adventure here...
-    (0,kolmafia__WEBPACK_IMPORTED_MODULE_3__.retrieveItem)(1, (0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject66 || (_templateObject66 = _taggedTemplateLiteral(["ten-leaf clover"]))));
-    (0,kolmafia__WEBPACK_IMPORTED_MODULE_3__.setProperty)('cloverProtectActive', 'false');
-    (0,kolmafia__WEBPACK_IMPORTED_MODULE_3__.adv1)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$location)(_templateObject67 || (_templateObject67 = _taggedTemplateLiteral(["A-Boo Peak"]))), -1, '');
-    (0,kolmafia__WEBPACK_IMPORTED_MODULE_3__.setProperty)('cloverProtectActive', 'true');
+    (0,kolmafia__WEBPACK_IMPORTED_MODULE_3__.retrieveItem)(1, (0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject66 || (_templateObject66 = _taggedTemplateLiteral(["11-leaf clover"]))));
+    (0,kolmafia__WEBPACK_IMPORTED_MODULE_3__.use)(1, (0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject66 || (_templateObject66 = _taggedTemplateLiteral(["11-leaf clover"]))));
+    (0,kolmafia__WEBPACK_IMPORTED_MODULE_3__.adv1)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$location)(_templateObject67 || (_templateObject67 = _taggedTemplateLiteral(["A-Boo Peak"]))), -1, '');    
     theoreticalProgress = (0,_lib__WEBPACK_IMPORTED_MODULE_2__.getPropertyInt)('booPeakProgress') - 30 * (0,kolmafia__WEBPACK_IMPORTED_MODULE_3__.availableAmount)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject68 || (_templateObject68 = _taggedTemplateLiteral(["A-Boo Clue"]))));
   }
 
