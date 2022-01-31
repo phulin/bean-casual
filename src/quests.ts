@@ -247,10 +247,9 @@ export function aboo() {
   let theoreticalProgress = getPropertyInt('booPeakProgress') - 30 * availableAmount($item`A-Boo Clue`);
   while (theoreticalProgress > 0) {
     // while blasts through intro adventure here...
-    retrieveItem(1, $item`ten-leaf clover`);
-    setProperty('cloverProtectActive', 'false');
-    adv1($location`A-Boo Peak`, -1, '');
-    setProperty('cloverProtectActive', 'true');
+    retrieveItem(1, $item`11-leaf clover`);
+    use(1, $item`11-leaf clover`);
+    adv1($location`A-Boo Peak`, -1, '');    
     theoreticalProgress = getPropertyInt('booPeakProgress') - 30 * availableAmount($item`A-Boo Clue`);
   }
 
